@@ -17,7 +17,7 @@ for script in ['home.js', 'motion.js', 'app.js']:
     html = html.replace(f'<script src="{script}"></script>', '<script>\n' + js.replace('</script', '<\\/script') + '\n</script>')
 license_text = (src / 'assets/OFL-Onest.txt').read_text(encoding='utf-8')
 license_data = json.dumps({'font': 'Onest', 'license': license_text}, ensure_ascii=False).replace('<', '\\u003c')
-html = html.replace('<head>', '<head>\n<script type="application/json" id="font-license">' + license_data + '</script>')
+html = html.replace('</head>', '<script type="application/json" id="font-license">' + license_data + '</script>\n</head>')
 (root / 'index.html').write_text(html, encoding='utf-8')
 with zipfile.ZipFile(root / 'ORBIT-demo.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
     archive.write(root / 'index.html', 'ORBIT-demo/index.html')
